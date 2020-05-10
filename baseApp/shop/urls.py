@@ -1,7 +1,9 @@
-from django.urls import path
-from .views import * 
+from django.urls import path, include
+from shop import views as  shop_view
 
 urlpatterns = [
-    path('', home),
+    path('', shop_view.home),
+    path('catalog/', include('product.urls')),
 ]
+
 
