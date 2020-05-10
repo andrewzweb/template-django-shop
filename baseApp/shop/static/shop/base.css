@@ -1,4 +1,9 @@
-body {
+body, html{
+	margin: 0;
+	padding: 0;
+}
+
+body, html{
 	display: flex;
 	flex-flow: column nowrap;
 	justify-content: space-between;
@@ -8,7 +13,7 @@ body {
 
 a{
 	text-decoration: none;
-	color: black;
+	color: #333;
 }
 
 #header {
@@ -16,23 +21,33 @@ a{
 	flex-flow: row wrap;
 	justify-content: space-between;
 	align-items: center;
-	border-bottom: 1px solid #999
+	border-bottom: 1px solid #999;
 }
 
 #header{
 	padding: 1rem;
 }
 
-.logo img{
-	width: 60px;
-	height: 60px;
+#header .logo {
+	display: flex;
+	align-items: center;
 }
 
-.nav a{
+#header .logo i {
+	font-size: 2rem;
+	color: #333;
+	padding: 0.5rem;
+}
+
+#header .logo span {
+	font-size: 1.2rem;
+	font-weight: bold;
+}
+#header .nav a {
 	padding: 0 0.5rem;
 }
 
-.user-menu a{
+#header .user-menu a{
 	padding: 0 1rem;
 }
 
@@ -45,3 +60,4 @@ a{
 	box-sizing: border;
 	border-top: 1px solid #999
 }
+
