@@ -115,5 +115,7 @@ media/
 # sass
 .sass-cache/
 
+# webdriver log file
+geckodriver.log
 
 
