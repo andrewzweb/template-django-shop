@@ -2,7 +2,10 @@ from django.db import models
 
 
 class Product(models.Model):
-    title = models.ImageField(upload_to='product')
-    title = models.CharField(max_length=200)
-    price = models.DecimalField(max_digits=5, decimal_places=2)
+    image = models.ImageField(upload_to='product', blank=True, null=True)
+    title = models.CharField(max_length=200, blank=False)
+    price = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
     
+    def __str__(self):
+        return "{}".format(self.title)
+
