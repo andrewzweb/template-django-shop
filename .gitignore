@@ -106,8 +106,6 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-# End of https://www.gitignore.io/api/python
-
 # db
 *.sqlite3
 
@@ -117,5 +115,5 @@ media/
 # sass
 .sass-cache/
 
-# django migrations  
-migrations/
+
+
