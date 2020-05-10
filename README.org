@@ -1,8 +1,5 @@
 
 * Shop 
-  :PROPERTIES:
-  :ID:       aae956eb-f0eb-43fb-bc28-e280b50f1fcd
-  :END:
 
 Scope of project: 
 build simple template for shop based on django 
