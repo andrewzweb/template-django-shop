@@ -1,4 +1,5 @@
 {% load static %}
+{% load %}
 
 <!doctype html>
 <html lang="en">
@@ -25,11 +26,29 @@
 	  </div>
 	</div>
 
+	
 
 	<div id="products">
-	  {% block products %}
-	  {% endblock %}
-	</div>
+	  {% if products %}
+		<link href="{% static "product/product.css" %}" rel="stylesheet"/>
+		<link href="{% static "product/product-list.css" %}" rel="stylesheet"/>
+
+		{% for product in products %}
+		  <div class="product product-item">
+			<div class="product__image">
+			  {% if product.image %}
+				<img alt="" src="{{ product.image.url }}"/>
+			  {% endif %}
+			</div>
+			<div class="product__title">{{ product.title }}</div>
+			<div class="product__price">{{ product.price }}</div>	  
+		  </div>
+		{% endfor %}
+	  {% else %}
+		{% block products %}
+		{% endblock %}
+	  {% endif %}
+	  </div>
 
 	<div id="footer">
 	  <div class="copirights">© 2020 All rights reserved. Designed by AndrewZweb.</div>

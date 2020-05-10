@@ -1,0 +1,23 @@
+{% extends 'shop/base.html' %}
+{% load static %}
+
+{% block products %}
+  <link href="{% static "product/product.css" %}" rel="stylesheet"/>
+  <link href="{% static "product/product-list.css" %}" rel="stylesheet"/>
+
+  {% if products %}
+  {% for product in products %}
+	<div class="product product-item">
+	  <div class="product__image">
+		{% if product.image %}
+		  <img alt="" src="{{ product.image.url }}"/>
+		{% endif %}
+	  </div>
+	  <div class="product__title">{{ product.title }}</div>
+	  <div class="product__price">{{ product.price }}</div>	  
+	</div>
+  {% endfor %}
+  {% else %}
+  <div>Products soon be here...</div>
+  {% endif %}
+{% endblock %}
