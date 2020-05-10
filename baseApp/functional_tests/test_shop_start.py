@@ -1,4 +1,5 @@
 from .base import FunctionalTest
+import time 
 
 class ShopShowStartPageTest(FunctionalTest):
 
@@ -20,10 +21,10 @@ class ShopShowStartPageTest(FunctionalTest):
         self.browser.find_element_by_id('footer')
 
 
-    def test_on_first_page_see_products(self):
-        
-        self.browser.get(self.live_server_url)
+    def test_get_catalog_product_page(self):
+        self.add_product_in_catalog()
+        self.browser.get(self.live_server_url+'/catalog/')
         products = self.browser.find_elements_by_class_name('product-item')
-        assert len(products) >= 1
+        assert len(products) == 2
         
 

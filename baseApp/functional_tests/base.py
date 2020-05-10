@@ -3,6 +3,7 @@ from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from selenium import webdriver 
 from selenium.common.exceptions import WebDriverException
 import time 
+from product.models import Product
 
 MAX_WAIT = 7
 
@@ -42,3 +43,13 @@ class FunctionalTest(StaticLiveServerTestCase):
     @wait
     def wait_for(self, fn):
         return fn
+
+
+    def add_product_in_catalog(self):
+        p1 = Product.objects.create(title='product1')
+        p1.save()
+        p2 = Product.objects.create(title='product2')
+        p2.save()
+
+
+    
