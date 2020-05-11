@@ -13,12 +13,12 @@
   <body>
 	<div id="header" class="sticky-top">
 	  <div class="nav">
-		<a href="#">Catalog</a>
+		<a href="{% url 'product:list' %}">Catalog</a>
 		<a href="#">Popular</a>
 		<a href="#">Products</a>
 		<a href="#">Sale</a>
 	  </div>
-	  <div class="logo"><i class="far fa-gem"></i><span>Shop</span></div>
+	  <div class="logo"><a href="{% url 'shop_index' %}"><i class="far fa-gem"></i><span>Shop</span></a></div>
 	  <div class="user-menu">
 		<a href=""><i class="far fa-heart"></i></a>
 		<a href=""><i class="far fa-user"></i></a>
@@ -40,15 +40,20 @@
 				<img alt="" src="{{ product.image.url }}"/>
 			  {% endif %}
 			</div>
-			<div class="product__title">{{ product.title }}</div>
+			<div class="product__title">{{ product.title }} title</div>
 			<div class="product__price">{{ product.price }}</div>	  
+			<a href="{% url 'product:item' slug=product.slug %}">view</a>
 		  </div>
 		{% endfor %}
 	  {% else %}
 		{% block products %}
 		{% endblock %}
 	  {% endif %}
-	  </div>
+	  
+	  {% block product %}
+	  {% endblock %}
+	</div>
+
 
 	<div id="footer">
 	  <div class="copirights">© 2020 All rights reserved. Designed by AndrewZweb.</div>
