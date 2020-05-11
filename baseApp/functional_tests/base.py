@@ -3,7 +3,9 @@ from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from selenium import webdriver 
 from selenium.common.exceptions import WebDriverException
 import time 
+
 from product.models import Product
+from django.utils.text import slugify
 
 MAX_WAIT = 7
 
@@ -45,11 +47,14 @@ class FunctionalTest(StaticLiveServerTestCase):
         return fn
 
 
-    def add_product_in_catalog(self):
-        p1 = Product.objects.create(title='product1')
+    def add_product(self, name=None):
+        if name == None:
+            name_of_product = 'product1'
+        else: 
+            name_of_product = str(name)
+
+        p1 = Product.objects.create(title=name_of_product)
         p1.save()
-        p2 = Product.objects.create(title='product2')
-        p2.save()
+        slug_name_product = slugify(name_of_product)
+        return slug_name_product
 
-
-    

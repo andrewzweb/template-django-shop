@@ -22,7 +22,10 @@ class ShopShowStartPageTest(FunctionalTest):
 
 
     def test_get_catalog_product_page(self):
-        self.add_product_in_catalog()
+        ''' test get catalog product page'''
+        self.add_product(name='one')
+        self.add_product(name='two')
+
         self.browser.get(self.live_server_url+'/catalog/')
         products = self.browser.find_elements_by_class_name('product-item')
         assert len(products) == 2
