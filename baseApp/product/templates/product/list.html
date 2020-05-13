@@ -15,7 +15,7 @@
 	  </div>
 	  <div class="product__title">{{ product.title }}</div>
 	  <div class="product__price">{{ product.price }}</div>	  
-	  <a href="{{ product.slug }}">view</a>
+	  <a href="{% url 'catalog:item' product_slug=product.slug %}">view detail</a>
 	</div>
   {% endfor %}
   {% else %}

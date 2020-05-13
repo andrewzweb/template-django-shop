@@ -1,11 +1,9 @@
 {% load static %}
-{% load %}
 
 <!doctype html>
 <html lang="en">
   <head>
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta charset="UTF-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" charset="UTF-8"/>
     <title>Shop</title>
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet" />
 	<link href="{% static 'shop/base.css' %}" rel="stylesheet"/>
@@ -13,7 +11,7 @@
   <body>
 	<div id="header" class="sticky-top">
 	  <div class="nav">
-		<a href="{% url 'product:list' %}">Catalog</a>
+		<a href="{% url 'catalog:list' %}">Catalog</a>
 		<a href="#">Popular</a>
 		<a href="#">Products</a>
 		<a href="#">Sale</a>
@@ -29,26 +27,8 @@
 	
 
 	<div id="products">
-	  {% if products %}
-		<link href="{% static "product/product.css" %}" rel="stylesheet"/>
-		<link href="{% static "product/product-list.css" %}" rel="stylesheet"/>
-
-		{% for product in products %}
-		  <div class="product product-item">
-			<div class="product__image">
-			  {% if product.image %}
-				<img alt="" src="{{ product.image.url }}"/>
-			  {% endif %}
-			</div>
-			<div class="product__title">{{ product.title }} title</div>
-			<div class="product__price">{{ product.price }}</div>	  
-			<a href="{% url 'product:item' slug=product.slug %}">view</a>
-		  </div>
-		{% endfor %}
-	  {% else %}
-		{% block products %}
-		{% endblock %}
-	  {% endif %}
+	  {% block products %}
+	  {% endblock %}
 	  
 	  {% block product %}
 	  {% endblock %}
