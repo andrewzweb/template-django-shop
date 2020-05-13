@@ -9,5 +9,5 @@ class CartTest(TestCase):
 
     def test_default_cart_empty(self):
         resp = self.client.get('/cart/')
-        assert 'Cart is empty...' in resp
+        self.assertContains(resp, "Cart is empty" )
 
