@@ -11,3 +11,10 @@ class CartTest(TestCase):
         resp = self.client.get('/cart/')
         self.assertContains(resp, "Cart is empty" )
 
+    def test_add_item_in_cart(self):
+        cart_item = CartItem.objects.create(title='Avocado',count=2,price=float(2.00))
+        resp = self.client.get('/cart/')
+        self.assertNotContains(resp, "Cart is empty")
+        self.assertIn(cart_item, resp)
+
+
