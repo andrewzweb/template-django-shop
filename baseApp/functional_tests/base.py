@@ -7,7 +7,7 @@ import time
 from product.models import Product
 from django.utils.text import slugify
 
-MAX_WAIT = 7
+MAX_WAIT = 5
 
 class FunctionalTest(StaticLiveServerTestCase):
     """ base for functional tests """
