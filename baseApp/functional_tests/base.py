@@ -15,6 +15,7 @@ class FunctionalTest(StaticLiveServerTestCase):
     def setUp(self):
         ''' start firefox '''
         self.browser = webdriver.Firefox()
+        self.browser.set_window_size(800, 600)
         staging_server = os.environ.get('STAGING_SERVER')
         if staging_server: 
             self.live_server_url = 'http://' + staging_server
