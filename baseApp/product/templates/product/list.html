@@ -2,7 +2,6 @@
 {% load static %}
 
 {% block products %}
-  <link href="{% static "product/product.css" %}" rel="stylesheet"/>
   <link href="{% static "product/product-list.css" %}" rel="stylesheet"/>
 
   {% if products %}
@@ -14,8 +13,17 @@
 		{% endif %}
 	  </div>
 	  <div class="product__title">{{ product.title }}</div>
-	  <div class="product__price">{{ product.price }}</div>	  
-	  <a href="{% url 'catalog:item' product_slug=product.slug %}">view detail</a>
+	  {% if product.price %}
+		<div class="product__price">{{ product.price }}</div>	  
+	  {% endif %}
+	  <div class="product__actions actions">
+		<div class="actions__view">
+		  <a href="{% url 'catalog:item' product_slug=product.slug %}">view detail</a>
+		</div>
+		<div class="actions__add">
+		  <a href="">add to cart</a>
+		</div>
+	  </div>
 	</div>
   {% endfor %}
   {% else %}

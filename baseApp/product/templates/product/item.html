@@ -1,7 +1,9 @@
 {% extends 'shop/base.html' %}
+{% load static %}
 
 {% block product %}
-  <h2>{{ product.title }} </h2>
+  <link href="{% static "product/product-item.css" %}" rel="stylesheet"/>
+
   <div class="product product-item">
 	{% if product.image %}
 	  <div class="product__image">
@@ -9,7 +11,16 @@
 	  </div>
 	{% endif %}
 	<div class="product__title">{{ product.title }}</div>
-	<div class="product__price">{{ product.price }}</div>	  
+	{% if product.price %}
+	  <div class="product__price">Price: {{ product.price }}</div>	  
+	{% endif %}
+	
+	<div class="actions">
+	  <div class="actions__add">
+		<a href="">add to cart</a>
+	  </div>
+	</div>
+
   </div>
 {% endblock %}
 
