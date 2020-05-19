@@ -24,9 +24,8 @@
 	  <div class="logo"><a href="{% url 'catalog:list' %}"><i class="far fa-gem"></i><span>Shop</span></a></div>
 	  <div class="user-menu">
 		<a href=""><i class="far fa-heart"></i></a>
-		<a href=""><i class="far fa-user"></i></a>
+		<a href="{% url 'account:detail' %}"><i class="far fa-user"></i></a>
 		<a class="link-to-cart" href="{% url 'cart:cart_detail' %}">
-		  
 		<i class="fas fa-shopping-cart"></i>
 		{% with total_items=cart|length %}
 		  {% if cart|length > 0 %}
