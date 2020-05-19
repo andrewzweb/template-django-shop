@@ -1,4 +1,5 @@
 from .base import FunctionalTest
+from django.urls import reverse 
 import time 
 
 class ShopShowStartPageTest(FunctionalTest):
@@ -11,15 +12,16 @@ class ShopShowStartPageTest(FunctionalTest):
         self.wait_for(self.browser.find_element_by_id('header'))
         self.wait_for(self.browser.find_element_by_id('footer'))
 
-        self.assertIn('Shop', self.browser.title)
+        self.assertIn('Catalog', self.browser.title)
 
     def test_get_catalog_product_page(self):
         ''' test get catalog product page'''
         self.add_product(name='one')
         self.add_product(name='two')
         
-        self.browser.get(self.live_server_url+'/catalog/all/')
+        resp = self.browser.get(self.live_server_url)
         products = self.wait_for(self.browser.find_elements_by_class_name('product-item'))
-        assert len(products) == 2
         
+        assert len(products) == 2
+
 
