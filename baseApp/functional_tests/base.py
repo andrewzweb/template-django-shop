@@ -48,13 +48,13 @@ class FunctionalTest(StaticLiveServerTestCase):
         return fn
 
 
-    def add_product(self, name=None):
+    def add_product(self, name=None, **kwargs):
         if name == None:
             name_of_product = 'product1'
         else: 
             name_of_product = str(name)
 
-        p1 = Product.objects.create(title=name_of_product)
+        p1 = Product.objects.create(title=name_of_product, **kwargs)
         p1.save()
         slug_name_product = slugify(name_of_product)
         return slug_name_product
