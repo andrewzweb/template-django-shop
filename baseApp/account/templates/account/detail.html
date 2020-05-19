@@ -1,9 +1,9 @@
 {% extends 'shop/base.html' %}
 {% load static %}
 
+{% block title %}You account{% endblock %}
+
 {% block content %}
   <h2>Hi it's account page {% if username %}{{username}}{% else %}stranger's{% endif %}</h2>
 {% endblock %}
-
-
 

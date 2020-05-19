@@ -6,11 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" charset="UTF-8"/>
 	<link href="{% static 'shop/fontawesome-free-5.13.0-web/css/all.css' %}" rel="stylesheet"/>
 	<link href="{% static 'shop/base.css' %}" rel="stylesheet"/>
-	{% if title %}
-	  <title>{% block title %}{% endblock %}</title>
-	{% else %}
-	  <title>Shop</title>
-	{% endif %}
+	<title>{% block title %}{% endblock %}</title>
 
   </head>
   <body>

@@ -1,6 +1,8 @@
 {% extends 'shop/base.html' %}
 {% load static %}
 
+{% block title %}Catalog: {{product.title}}{% endblock %}
+
 {% block product %}
   <link href="{% static "product/product-item.css" %}" rel="stylesheet"/>
 
