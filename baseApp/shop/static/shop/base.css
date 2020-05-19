@@ -82,3 +82,19 @@ a{
 		opacity: 1;
 	}
 }
+
+.link-to-cart{
+	position: relative;
+}
+
+.link-to-cart .count-item--exist {
+	background-color: red;
+	color: white;
+	border-radius: 20%;
+	padding: 0.1rem;
+	position: absolute;
+	top: -0.5rem;
+	right: 0;
+	font-size: 0.6rem;
+	font-weight: bold;
+}
