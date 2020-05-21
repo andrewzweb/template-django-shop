@@ -24,6 +24,12 @@ class AccountTest(TestCase):
     def test_login_user_dont_exist(self):
         assert self.client.login(username='fake', password='pass') == False
 
+
+    def test_registration_user(self):
+        assert self.client.get(reverse('account:register')).status_code == 200 
+        
+        
+
         
 
 

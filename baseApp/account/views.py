@@ -4,7 +4,7 @@ from django.urls import reverse_lazy
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import messages
 from django.contrib.auth import logout
-
+from .forms import RegisterForm
 
 
 def detail(request):
@@ -33,4 +33,9 @@ def account_login(request):
 def account_logout(request):
     logout(request)
     return redirect('account:login')
+    
+
+def account_register(request):
+    form_register = RegisterForm()
+    return render(request, 'account/register.html', {'form_register':form_register})
     
