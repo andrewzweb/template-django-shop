@@ -4,6 +4,12 @@
 {% block title %}You account{% endblock %}
 
 {% block content %}
-  <h2>Hi it's account page {% if username %}{{username}}{% else %}stranger's{% endif %}</h2>
+  {% if user.is_authenticated %}
+	<p>Hi {{ user.get_username }}. Thanks for logging in.</p>
+	<p>You can <a href="{% url 'account:logout' %}">logout</a>.</p>
+  {% else %}
+	<p>Hi, new user. Please <a href="{% url 'account:login' %}">log in.</a></p>
+	<p>For can see your orders.</p>
+  {% endif %}
 {% endblock %}
 
