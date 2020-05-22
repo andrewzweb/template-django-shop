@@ -1,0 +1,24 @@
+{% extends 'shop/base.html' %}
+{% load static %}
+
+{% block title %}Add product{% endblock %}
+
+{% block content %}
+
+  {% if form.subject.errors %}
+    <ol>
+      {% for error in form.subject.errors %}
+		<li><strong>{{ error|escape }}</strong></li>
+      {% endfor %}
+    </ol>
+  {% endif %}
+
+  <form method="post">
+	{{ form.as_p }}
+	{% csrf_token %}
+	<button type="submit">add product</button>
+  </form>
+{% endblock %}
+
+
+
