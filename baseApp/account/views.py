@@ -5,6 +5,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import messages
 from django.contrib.auth import logout
 from .forms import RegisterForm
+from django.contrib.auth.models import User
 
 
 def detail(request):
@@ -36,6 +37,27 @@ def account_logout(request):
     
 
 def account_register(request):
-    form_register = RegisterForm()
+
+    if request.method == 'POST':
+        form_register = RegisterForm(request.POST)
+        if form_register.is_valid():
+            username = request.POST['username']
+            email = request.POST['email']
+            password1 = request.POST['password1']
+            password2 = request.POST['password2']
+
+            if password1 == password2: 
+                print('create user here ')
+                user = User.objects.create_user(username, 'lennon@thebeatles.com', 'johnpassword')
+                return redirect('account:register-done')
+            else:
+                return render(request, 'account/register.html', {'form_register':form_register})
+        else:
+            return render(request, 'account/register.html', {'form_register':form_register})
+    else:
+        form_register = RegisterForm()
     return render(request, 'account/register.html', {'form_register':form_register})
     
+
+def account_register_done(request):
+    return render(request, 'account/register-done.html')
