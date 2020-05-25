@@ -6,11 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" charset="UTF-8"/>
 	<link href="{% static 'shop/fontawesome-free-5.13.0-web/css/all.css' %}" rel="stylesheet"/>
 	<link href="{% static 'shop/base.css' %}" rel="stylesheet"/>
-	{% if title %}
-	  <title>{% block title %}{% endblock %}</title>
-	{% else %}
-	  <title>Shop</title>
-	{% endif %}
+	<title>{% block title %}{% endblock %}</title>
 
   </head>
   <body>
@@ -24,9 +20,8 @@
 	  <div class="logo"><a href="{% url 'catalog:list' %}"><i class="far fa-gem"></i><span>Shop</span></a></div>
 	  <div class="user-menu">
 		<a href=""><i class="far fa-heart"></i></a>
-		<a href=""><i class="far fa-user"></i></a>
+		<a href="{% url 'account:detail' %}"><i class="far fa-user"></i></a>
 		<a class="link-to-cart" href="{% url 'cart:cart_detail' %}">
-		  
 		<i class="fas fa-shopping-cart"></i>
 		{% with total_items=cart|length %}
 		  {% if cart|length > 0 %}
