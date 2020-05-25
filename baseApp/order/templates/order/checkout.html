@@ -10,6 +10,15 @@
 	<h1>checkout</h1>
 	<div class="checkout-wrapper">
 	  <div class="detail">
+		<div class="buy-holder">
+		  <form action="." method="post" class="order-form">
+			{{ form.as_p }}
+			<input class="buy" type="submit" value="Place order ${{ cart.get_total_price }}">
+			{% csrf_token %}
+		  </form>
+		</div>
+
+		<!-- 
 		<div class="shipping-detail">
 		  <h3>shipping detail</h3>
 		  <div class="name">Josh Doe</div>
@@ -23,122 +32,52 @@
 		  <div class="card-date">20/12</div>
 		  <div class="card-cvv">212</div>
 		</div>
+		-->
 	  </div>
+
 	  <div class="order">
 		<h3>Your order</h3>
 
-		<div class="order__item item">
-		  <div class="item__image">
-			{% if item.image %}
-			  <img alt="" src="{{ order.image.url }}"/>
-			{% else %}
-			  <img alt="" src="{% static 'shop/no-image.png' %}"/>
-			{% endif %}
-		  </div>
-		  <div class="item__title">
-			{% if item.title %}
-			  <a href="{% url item.slug %}">{{ item.title }}</a>
-			{% else %}
-			  <a href="#">Order-title</a>
-			{% endif %}
-		  </div>
-		  <div class="item__count">
-			{% if item.count %}
-			  <span>3</span>
-			{% else %}
-			  <span>3</span>
-			{% endif %}
-		  </div>
-		  <div class="item__price">
-			{% if item.price %}
-			  <span>$ {{ item.price }}</span>
-			{% else %}
-			  <span>$ 3.00</span>
-			{% endif %}
-		  </div>
-		</div>
-
-		<div class="order__item item">
-		  <div class="item__image">
-			{% if item.image %}
-			  <img alt="" src="{{ order.image.url }}"/>
-			{% else %}
-			  <img alt="" src="{% static 'shop/no-image.png' %}"/>
-			{% endif %}
-		  </div>
-		  <div class="item__title">
-			{% if item.title %}
-			  <a href="{% url item.slug %}">{{ item.title }}</a>
-			{% else %}
-			  <a href="#">Order-title223</a>
-			{% endif %}
-		  </div>
-		  <div class="item__count">
-			{% if item.count %}
-			  <span>3</span>
-			{% else %}
-			  <span>3</span>
-			{% endif %}
-		  </div>
-		  <div class="item__price">
-			{% if item.price %}
-			  <span>$ {{ item.price }}</span>
-			{% else %}
-			  <span>$ 3.00</span>
-			{% endif %}
-		  </div>
-		</div>
-
-
-		<div class="order__item item">
-		  <div class="item__image">
-			{% if item.image %}
-			  <img alt="" src="{{ order.image.url }}"/>
-			{% else %}
-			  <img alt="" src="{% static 'shop/no-image.png' %}"/>
-			{% endif %}
-		  </div>
-		  <div class="item__title">
-			{% if item.title %}
-			  <a href="{% url item.slug %}">{{ item.title }}</a>
-			{% else %}
-			  <a href="#">Order-title</a>
-			{% endif %}
-		  </div>
-		  <div class="item__count">
-			{% if item.count %}
-			  <span>3</span>
-			{% else %}
-			  <span>3</span>
-			{% endif %}
-		  </div>
-		  <div class="item__price">
-			{% if item.price %}
-			  <span>$ {{ item.price }}</span>
-			{% else %}
-			  <span>$ 3.00</span>
-			{% endif %}
-		  </div>
-		</div>
+		{% if cart %}
+		  {% for item in cart %}
+			<div class="order__item item">
+			  <div class="item__image">
+				{% if item.product.image %}
+				  <img alt="" src="{{ item.product.image.url }}"/>
+				{% else %}
+				  <img alt="" src="{% static 'shop/no-image.png' %}"/>
+				{% endif %}
+			  </div>
+			  <div class="item__title">
+				  <a href="">{{ item.product.title }}</a>
+			  </div>
+			  <div class="item__quantity">
+				  <span>{{ item.quantity }}</span>
+			  </div>
+			  <div class="item__price">
+				  <span>${{ item.total_price }}</span>
+			  </div>
+			</div>
+		  {% endfor %}
+		{% else %}
+		  <p>Now nothing in order...</p>
+		{% endif %}
 
 		<div class="order__summary">
 		  <div class="subtotal">
 			<p>subtotal</p>
-			<span>$ 32</span>
+			<span>${{ cart.get_total_price }}</span>
 		  </div>
 		  <div class="shipping">
-			<p>shipping</p>
-			<span>$ 0.04</span>
+			<p>delivery</p>
+			<span>$ 2.00</span>
 		  </div>
 		  <div class="total">
 			<p>total</p>
-			<span>$ 32.04</span>
+			<span>${{ cart.get_total_price }}</span>
 		  </div>
 		</div>
 
-	  </div>
-	  <div class="buy-holder">
-		<input class="buy" name="buy" type="submit" value="purchese $32.00"/>
 	  </div>
 	</div>
   </section>
