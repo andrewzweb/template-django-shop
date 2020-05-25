@@ -58,7 +58,7 @@
 
   <div class="active-button">
 	<a class="back-buy-smt" href="{% url "catalog:list" %}" >Continue shopping</a>
-	<a class="checkout" href="#" class="button">Checkout</a>
+	<a class="checkout" href="{% url 'order:checkout' %}" class="button">Checkout</a>
   </div>
   
 {% endblock %}
