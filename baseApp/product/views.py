@@ -1,10 +1,11 @@
 from django.shortcuts import render
 from .models import Product
-from cart.forms import CartAddProductForm
+from cart.forms import CartAddProductForm, CartAddProductHideQuantityForm
 
 def product_list(request):
     products = Product.objects.all()
-    return render(request, 'product/list.html', {'products': products})
+    cart_product_form = CartAddProductHideQuantityForm()
+    return render(request, 'product/list.html', {'products': products, 'cart_product_form':cart_product_form})
 
 def product_item(request, product_slug):
     product = Product.objects.get(slug=str(product_slug))

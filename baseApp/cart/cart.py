@@ -55,13 +55,11 @@ class Cart(object):
         for product in products:
             self.cart[str(product.id)]['product'] = product
             
-        try: 
-            for item in self.cart.values():
-                item['price'] = Decimal(item['price']) 
-                item['total_price'] = item['price'] * item['quantity']
-                yield item
-        except:
-            self.clear()
+        for item in self.cart.values():
+            item['price'] = Decimal(item['price']) 
+            item['total_price'] = item['price'] * item['quantity']
+            yield item
+            
 
     def __len__(self):
         """
@@ -77,3 +75,5 @@ class Cart(object):
         # remove cart from session
         del self.session[settings.CART_SESSION_ID]
         self.session.modified = True
+
+

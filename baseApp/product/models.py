@@ -9,7 +9,7 @@ class Product(models.Model):
     slug = models.SlugField(default='', blank=True)
     
     def __str__(self):
-        return "{}".format(self.title)
+        return self.title
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title)
