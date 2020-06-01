@@ -1,0 +1,20 @@
+
+#content {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    
+}
+
+form{
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+}
+
+input{
+    padding: 0.5rem 0;
+    margin: 0.5rem 0;
+}
+

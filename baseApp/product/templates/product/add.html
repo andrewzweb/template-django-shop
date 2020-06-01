@@ -4,7 +4,7 @@
 {% block title %}Catalog: {{product.title}}{% endblock %}
 
 {% block product %}
-<link href="{% static "product/product-item.css" %}" rel="stylesheet"/>
+<link href="{% static "product/product-add.css" %}" rel="stylesheet"/>
 
 <h2>Add product</h2>
 
@@ -12,7 +12,7 @@
   <form method="POST">
     {{ form }}
     {% csrf_token %}
-    <input type="submit" value="Add Product"/>
+    <input name="add" type="submit" value="Add Product"/>
   </form>
 </div>
 {% endblock %}
