@@ -28,4 +28,17 @@ def product_add(request):
         
         
 
+def product_del(request, product_slug):
+    product = Product.objects.get(slug=str(product_slug))
+
+    if request.method == 'POST':
+        product = Product.objects.get(slug=str(product_slug))
+        product.delete()
+        return redirect(reverse('catalog:list'))
+    else:
+        product = Product.objects.get(slug=str(product_slug))
+        return render(request, 'product/del.html', { 'product':product})
+    
+    return render(request, 'product/del.html', {})
+
 

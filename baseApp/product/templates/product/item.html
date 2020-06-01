@@ -22,7 +22,17 @@
 	{% endif %}
 	
 	<div class="actions">
-	  <div class="actions__add">
+
+      <div class="actions__edit">
+        <a href="{% url 'catalog:product_edit' product_slug=product.slug %}">Edit</a>
+      </div>
+
+      <div class="actions__delete">
+        <a href="{% url 'catalog:product_del' product_slug=product.slug %}">Delete</a>
+      </div>
+
+      <div class="actions__add">
+
 		<form action="{% url "cart:cart_add" product.id %}" method="POST">
 		  {% csrf_token %}
 		  {{ cart_product_form }}

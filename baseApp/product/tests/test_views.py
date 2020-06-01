@@ -36,3 +36,81 @@ class AddProductTest(TestCase):
         assert Product.objects.count() == 2
 
 
+class EditProductTest(TestCase):
+    ''' add product tests'''
+
+    def test_edit_product_change_title(self):
+        p_title_first='product'
+        p_title_second='product'
+        p_price  = 2
+        Product.objects.create(title=p_title_first, price=p_price)
+        
+        self.client.post(
+            reverse('catalog:product_edit', kwargs={'product_slug':p_title_first}),
+            {
+                'title':p_title_second,
+                'price': p_price
+            })
+        assert Product.objects.first().title == p_title_second
+
+    def test_edit_product_change_price(self):
+        p_title='product'
+        p_price_fisrt  = 2
+        p_price_second = 3
+        Product.objects.create(title=p_title, price=p_price_fisrt)
+        
+        self.client.post(
+            reverse('catalog:product_edit', kwargs={'product_slug':p_title}),
+                {
+                    'title':p_title,
+                    'price': p_price_second
+                })
+        
+        assert Product.objects.first().price == p_price_second
+
+    def test_edit_product_clear_price(self):
+        p_title='product'
+        p_price  = 2
+        Product.objects.create(title=p_title, price=p_price)
+        
+        self.client.post(
+            reverse('catalog:product_edit', kwargs={'product_slug':p_title}),
+            {
+                'title':p_title,
+                'price': ''
+            })
+
+        assert Product.objects.first().price == None
+
+class DeleteProductTest(TestCase):
+    ''' del product tests'''
+
+    def test_delete_product_send_POST(self):
+        p_title = 'product'
+        p_price  = 2
+        Product.objects.create(title=p_title, price=p_price)
+        assert Product.objects.count() == 1
+        
+        response = self.client.post(
+            reverse('catalog:product_del', kwargs={'product_slug':p_title}),
+            {
+                'title':p_title,
+            })
+        assert response.status_code == 302 
+        assert Product.objects.count() == 0
+
+    def test_delete_product_send_GET(self):
+        p_title = 'product'
+        p_price  = 2
+        Product.objects.create(title=p_title, price=p_price)
+        assert Product.objects.count() == 1
+        
+        response = self.client.get(
+            reverse('catalog:product_del', kwargs={'product_slug':p_title}),
+            {
+                'title':p_title,
+            })
+        assert response.status_code == 200
+        assert b'delete' in response.content
+
+
