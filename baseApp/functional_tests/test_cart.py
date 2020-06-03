@@ -14,7 +14,7 @@ class CartTest(FunctionalTest):
         # add product
         self.add_product(name='product1', **{'price':2})
 
-        # Toni go to our site  
+        # Toni go to our site
         self.browser.get(self.live_server_url + reverse('catalog:list'))
         # He find link to cart and click
         link_to_cart = self.wait_for(self.browser.find_element_by_class_name('link-to-cart')).click()
@@ -34,13 +34,13 @@ class CartTest(FunctionalTest):
 
         # He click to add in cart
         self.wait_for(self.browser.find_element_by_xpath('//button[text()="Add to cart"]')).click()
-        
+
         # And we redirect to cart page and see item in cart list
         title = self.wait_for(self.browser.find_element_by_class_name('title-page')).text
         assert title == 'Your shopping cart'
-        
 
-        # And see red label near link to cart and he text equal qualuty items Toni add to cart  
+
+        # And see red label near link to cart and he text equal qualuty items Toni add to cart
         count_item_in_cart = self.wait_for(self.browser.find_element_by_class_name('count-item--exist')).text
         assert count_item_in_cart == '1'
 
