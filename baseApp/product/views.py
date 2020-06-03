@@ -26,6 +26,17 @@ def product_add(request):
         return redirect(reverse('catalog:list'))
     return render(request, 'product/add.html', {'form':form})
         
+def product_edit(request, product_slug):
+    product = Product.objects.get(slug=str(product_slug))
+    
+    form = AddProductForm(instance=product)
+    if request.method == "POST":
+        form = AddProductForm(request.POST, instance=product)
+        if form.is_valid():
+            form.save()
+            
+        return redirect(reverse('catalog:list'))
+    return render(request, 'product/edit.html', {'form':form})
         
 
 def product_del(request, product_slug):

@@ -6,3 +6,4 @@ class AddProductForm(ModelForm):
         model = Product
         fields = ('image','title', 'price',)
 
+
