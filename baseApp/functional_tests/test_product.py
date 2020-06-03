@@ -1,25 +1,32 @@
 from .base import FunctionalTest
 from django.urls import reverse
+from product.models import Product
 
 
 class ProductItemTest(FunctionalTest):
     ''' test product item'''
 
     def test_get_product_item(self):
-        ''' get product item '''
+        ''' get product '''
 
+        # create product
         slug_name = self.add_product(name='product1')
-        self.browser.get(self.live_server_url + reverse('catalog:item', kwargs={'product_slug':slug_name}))
-        self.wait_for(self.browser.find_elements_by_class_name('product-item')) 
 
-    def test_get_dont_exist_product_item(self):
-        ''' get product item '''
+        # get_product
+        self.get_page(reverse('catalog:item', kwargs={'product_slug':slug_name}))
 
-        slug_name = self.add_product(name='product1')
-        self.browser.get(self.live_server_url + reverse('catalog:item', kwargs={'product_slug':slug_name}))
-        self.wait_for(self.browser.find_elements_by_class_name('error')) 
+        # see title
+        assert slug_name in self.wait_for(self.browser.find_element_by_class_name('product__title').text)
 
-        
+    def test_get_dont_exist_product(self):
+        ''' get dont exist product '''
+
+        # Samanta input wrong url
+        self.get_page('/product/dont-exist/')
+
+        # and see
+        assert str('Not Found') in self.browser.page_source
+
 class AddProductTest(FunctionalTest):
     ''' test add product item'''
 
@@ -32,11 +39,11 @@ class AddProductTest(FunctionalTest):
         product_price = 1
 
         # Samanta go to add_product page
-        self.browser.get(self.live_server_url + reverse('catalog:product_add'))
-
-        # when get page in page see 'add product'
-        #assert 'add product' in self.wait_for(self.browser.get(self.live_server_url + reverse('catalog:product_add')).get_source())
         self.get_page(reverse('catalog:product_add'))
+
+        # see in page 'Add product'
+        assert 'Add product' in self.browser.page_source
+
         # find field title
         find_title_field = self.wait_for(self.browser.find_element_by_name("title").clear())
         # typing a name of product what we want add
@@ -80,7 +87,7 @@ class EditProductTest(FunctionalTest):
         self.wait_for(self.browser.find_element_by_link_text('Edit')).click()
 
         # find field title and change title
-        find_title_field = self.wait_for(self.browser.find_element_by_name("title").clear())
+        self.wait_for(self.browser.find_element_by_name("title").clear())
         # typing a name of product what we want add
         self.browser.find_element_by_name("title").send_keys(new_product_name)
 

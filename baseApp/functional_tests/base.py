@@ -26,11 +26,8 @@ class FunctionalTest(StaticLiveServerTestCase):
         self.browser.quit()
 
     def get_page(self, page=None, *args, **kwargs):
-        if page != None:
-            page = self.browser.get(self.live_server_url + str(page))
-            return page
-        return False
-    
+        return self.browser.get(self.live_server_url + str(page))
+
     def wait(fn):
         ''' wait str in table '''
 
