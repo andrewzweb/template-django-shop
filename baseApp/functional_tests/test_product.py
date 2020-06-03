@@ -97,3 +97,35 @@ class EditProductTest(FunctionalTest):
         # and price
         assert str(new_product_price) in self.browser.find_element_by_class_name('product__price').text
 
+
+class DelProductTest(FunctionalTest):
+    ''' test edit product item'''
+
+    def test_del_product_item(self):
+        ''' test delete product item '''
+
+        # create item
+        Product.objects.create(title='product', price=1)
+
+        # Samanta want del old product
+
+        # Samanto go to home page
+        self.get_page(reverse('catalog:list'))
+
+        # she see product and clict to view product
+        self.wait_for(self.browser.find_element_by_link_text('view detail')).click()
+
+        # she see link Delete and click
+        self.wait_for(self.browser.find_element_by_link_text('Delete')).click()
+
+        # Title page  delete
+        assert 'Delete' in  self.browser.title
+
+        # and Samanta confirm action delete item
+        self.browser.find_element_by_name('delete').click()
+        
+
+        # when browser redirect to main page and can see  new title
+        assert len(self.browser.find_elements_by_class_name('product__title')) == 0
+        # and price
+        assert len(self.browser.find_elements_by_class_name('product__price')) == 0
