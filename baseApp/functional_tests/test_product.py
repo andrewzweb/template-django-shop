@@ -53,5 +53,47 @@ class AddProductTest(FunctionalTest):
         # when browser redirect to main page and can see title
         assert product_name in self.browser.find_element_by_class_name('product__title').text
         # and price
-        assert str(product_price) in self.browser.find_element_by_class_name('product__price').text 
+        assert str(product_price) in self.browser.find_element_by_class_name('product__price').text
+
+
+class EditProductTest(FunctionalTest):
+    ''' test edit product item'''
+
+    def test_edit_product_item(self):
+        ''' test edit product item '''
+
+        # create item
+        Product.objects.create(title='product', price=1)
+
+        # Samanta want edit product and change title and price
+        # product params was
+        new_product_name = str('product1')
+        new_product_price = int(3)
+
+        # Samanto go to home page
+        self.get_page(reverse('catalog:list'))
+
+        # she see product and clict to view product
+        self.wait_for(self.browser.find_element_by_link_text('view detail')).click()
+
+        # she see link Edit and click
+        self.wait_for(self.browser.find_element_by_link_text('Edit')).click()
+
+        # find field title and change title
+        find_title_field = self.wait_for(self.browser.find_element_by_name("title").clear())
+        # typing a name of product what we want add
+        self.browser.find_element_by_name("title").send_keys(new_product_name)
+
+        # find price field and change title
+        self.wait_for(self.browser.find_element_by_name('price').clear())
+        # typing a price of product what we want add
+        self.browser.find_element_by_name('price').send_keys(new_product_price)
+
+        # click to submit
+        find_submit = self.browser.find_element_by_name('add').click()
+
+        # when browser redirect to main page and can see  new title
+        assert new_product_name in self.browser.find_element_by_class_name('product__title').text
+        # and price
+        assert str(new_product_price) in self.browser.find_element_by_class_name('product__price').text
 
