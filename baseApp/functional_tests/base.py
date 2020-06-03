@@ -20,15 +20,17 @@ class FunctionalTest(StaticLiveServerTestCase):
         if staging_server: 
             self.live_server_url = 'http://' + staging_server
 
+            
     def tearDown(self):
         ''' quit from browser'''
         self.browser.quit()
 
-    def get_item_input_box(self):
-        '''get input element'''
-        return self.browser.find_element_by_id('id_text')
-
-
+    def get_page(self, page=None, *args, **kwargs):
+        if page != None:
+            page = self.browser.get(self.live_server_url + str(page))
+            return page
+        return False
+    
     def wait(fn):
         ''' wait str in table '''
 
