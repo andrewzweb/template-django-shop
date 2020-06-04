@@ -60,7 +60,6 @@ class EditProductTest(TestCase):
         p_title_second = 'product'
         p_price = 2
         Product.objects.create(title=p_title_first, price=p_price)
-
         self.client.post(
             reverse('catalog:product_edit', kwargs={'product_slug': p_title_first}),
             {
@@ -70,21 +69,21 @@ class EditProductTest(TestCase):
         assert Product.objects.first().title == p_title_second
 
     def test_edit_product_change_price(self):
-        p_title='product'
+        ''' test edit product change price '''
+        p_title = 'product'
         p_price_fisrt = 2
         p_price_second = 3
-        Product.objects.create(title=p_title, price=p_price_fisrt)
-
+        Product.objects.create(title=p_title, price=p_price_fisrt).save()
         self.client.post(
             reverse('catalog:product_edit', kwargs={'product_slug': p_title}),
             {
                 'title': p_title,
                 'price': p_price_second
             })
-
-        assert Product.objects.first().price == p_price_second
+        assert '3.00' in str(Product.objects.first().price)
 
     def test_edit_product_clear_price(self):
+        ''' test esit clear price '''
         p_title = 'product'
         p_price = 2
         Product.objects.create(title=p_title, price=p_price)
@@ -100,9 +99,10 @@ class EditProductTest(TestCase):
 
 
 class DeleteProductTest(TestCase):
-    ''' del product tests'''
+    ''' delete product '''
 
     def test_delete_product_send_POST(self):
+        ''' test delete product '''
         p_title = 'product'
         p_price = 2
         Product.objects.create(title=p_title, price=p_price)
@@ -116,7 +116,8 @@ class DeleteProductTest(TestCase):
         assert response.status_code == 302
         assert Product.objects.count() == 0
 
-    def test_delete_product_send_GET(self):
+    def test_when_delete_need_confirm(self):
+        ''' test when delete need confirm  '''
         p_title = 'product'
         p_price = 2
         Product.objects.create(title=p_title, price=p_price)

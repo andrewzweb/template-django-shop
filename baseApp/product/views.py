@@ -35,9 +35,11 @@ def product_edit(request, product_slug):
 
     form = ProductForm(instance=product)
     if request.method == "POST":
-        form = ProductForm(request.POST, instance=product)
-        if form.is_valid():
-            form.save()
+        new_form = ProductForm(request.POST, instance=product)
+        if new_form.is_valid():
+            new_form.save()
+            return redirect(reverse('catalog:item',
+                                    kwargs={'product_slug': product.slug}))
         return redirect(reverse('catalog:list'))
     return render(request, 'product/edit.html', {'form': form})
 
@@ -54,4 +56,3 @@ def product_del(request, product_slug):
         return render(request, 'product/del.html', {'product': product})
 
     return render(request, 'product/del.html', {})
-
