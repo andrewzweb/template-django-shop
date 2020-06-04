@@ -1,7 +1,8 @@
 from .base import FunctionalTest
+from selenium.webdriver.support.ui import Select
 from django.urls import reverse
-from product.models import Product
-
+from product.models import Product, Category
+import time
 
 class ProductItemTest(FunctionalTest):
     ''' test product item'''
@@ -96,8 +97,8 @@ class EditProductTest(FunctionalTest):
         # typing a price of product what we want add
         self.browser.find_element_by_name('price').send_keys(new_product_price)
 
-        # click to submit
-        find_submit = self.browser.find_element_by_name('add').click()
+        # find add and click
+        self.wait_for(self.browser.find_element_by_name('edit')).click()
 
         # when browser redirect to main page and can see  new title
         assert new_product_name in self.browser.find_element_by_class_name('product__title').text
@@ -130,9 +131,42 @@ class DelProductTest(FunctionalTest):
 
         # and Samanta confirm action delete item
         self.browser.find_element_by_name('delete').click()
-        
 
         # when browser redirect to main page and can see  new title
         assert len(self.browser.find_elements_by_class_name('product__title')) == 0
         # and price
         assert len(self.browser.find_elements_by_class_name('product__price')) == 0
+
+
+class CategoryTest(FunctionalTest):
+    ''' category '''
+
+    def test_add_category_to_product(self):
+        ''' test delete product item '''
+
+        # create category
+        category_name = 'category'
+        Category.objects.create(title=category_name)
+        # create item
+        Product.objects.create(title='product', price=1)
+
+        # Main Goal : Samanta want change category of product
+
+        # Samanto go to home page
+        self.get_page(reverse('catalog:list'))
+
+        # she see product and clict to view product
+        self.browser.find_element_by_link_text('view detail').click()
+
+        # she see link edit and click
+        self.browser.find_element_by_link_text('Edit').click()
+
+        # Samanta select category
+        self.wait_for(Select(
+            self.browser.find_element_by_id('id_category'))).select_by_value('1')
+
+        #  Samanta change what he wont and edit product end
+        self.browser.find_element_by_name('edit').click()
+
+        # when browser redirect to page product and she see new category
+        assert category_name in self.browser.find_element_by_class_name('product__category').text

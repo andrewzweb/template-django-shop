@@ -17,8 +17,9 @@
 		{% endif %}
 	  </div>
 	  <div class="product__title">{{ product.title }}</div>
+	  <div class="product__category">Category: {{ product.category }}</div>	  
 	  {% if product.price %}
-		<div class="product__price">Price: {{ product.price }} $</div>	  
+	  <div class="product__price">Price: {{ product.price }} $</div>	  
 	  {% endif %}
 	  <div class="product__actions actions">
 		<div class="actions__view">
