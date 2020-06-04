@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse
-from .models import Product
+from product.models import Product
 from cart.forms import CartAddProductForm, CartAddProductHideQuantityForm
-from .forms import AddProductForm
+from product.forms import ProductForm
 
 
 def product_list(request):
@@ -18,11 +18,11 @@ def product_item(request, product_slug):
 
 
 def product_add(request):
-    form = AddProductForm()
+    form = ProductForm()
     if request.method == "POST":
         title = request.POST['title']
         price = request.POST['price']
-        form = AddProductForm(request.POST)
+        form = ProductForm(request.POST)
         if form.is_valid():
             form.save()
 
@@ -33,9 +33,9 @@ def product_add(request):
 def product_edit(request, product_slug):
     product = Product.objects.get(slug=str(product_slug))
 
-    form = AddProductForm(instance=product)
+    form = ProductForm(instance=product)
     if request.method == "POST":
-        form = AddProductForm(request.POST, instance=product)
+        form = ProductForm(request.POST, instance=product)
         if form.is_valid():
             form.save()
         return redirect(reverse('catalog:list'))
@@ -54,3 +54,4 @@ def product_del(request, product_slug):
         return render(request, 'product/del.html', {'product': product})
 
     return render(request, 'product/del.html', {})
+

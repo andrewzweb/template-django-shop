@@ -1,13 +1,18 @@
 from django.test import TestCase
-from django.urls import  reverse
-from product.urls import *
-from product.forms import AddProductForm
+from product.models import Product, Category
+from product.forms import ProductForm
 
-class AddProductFormTest(TestCase):
-    ''' add product tests'''
+
+class ProductFormTest(TestCase):
+    ''' product test '''
 
     def test_form_add_product(self):
-        assert Product.objects.count() == 0
-        form = AddProductForm({'title':'product1'})
-        form.save()
+        ''' test form add product '''
+        ProductForm({'title': 'product1'}).save()
         assert Product.objects.count() == 1
+
+    def test_product_add_categoty(self):
+        ''' test form product add category '''
+        category = Category.objects.create(title='title').save()
+        ProductForm({'title': 'product1', 'category': category}).save()
+        assert Product.objects.first().category == category
