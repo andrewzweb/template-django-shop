@@ -65,5 +65,4 @@ class CategoryTest(TestCase):
         Product.objects.create(title='title2', category=category_second)
         assert Product.objects.count() == 2
         assert Product.objects.first().category == category_first
-        assert Product.objects.last().category == category_second
- 
+        assert Product.objects.last().category == category_second 
