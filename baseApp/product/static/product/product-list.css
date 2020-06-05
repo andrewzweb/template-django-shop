@@ -55,6 +55,9 @@
     padding: 1rem 1.5rem;
 }
 
+.actions__add {
+    background-color: green;
+}
 
 .actions__add form input{
 	color: white;

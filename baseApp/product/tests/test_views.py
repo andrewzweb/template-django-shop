@@ -1,8 +1,7 @@
 from django.test import TestCase
 from django.utils.text import slugify
 from django.urls import reverse
-from product.models import Product
-from product.urls import *
+from product.models import Product, Category
 from django.utils.datastructures import MultiValueDictKeyError
 
 
@@ -130,3 +129,35 @@ class DeleteProductTest(TestCase):
             })
         assert response.status_code == 200
         assert b'delete' in response.content
+
+
+class TestCategoryView(TestCase):
+    ''' category test '''
+
+    def test_filter_list_by_category(self):
+        ''' test filter list by category '''
+        category = Category.objects.create(title='category2')
+        prod1 = Product.objects.create(title='prod1', category=category)
+        prod2 = Product.objects.create(title='prod2', category=category)
+        prod3 = Product.objects.create(title='prod3')
+        assert Product.objects.count() == 3
+
+        resp = self.client.get(reverse('catalog:filter_by_category',
+                                       kwargs={'category_slug': 'category2'}))
+        self.assertContains(resp, prod1)
+        self.assertContains(resp, prod2)
+        self.assertNotContains(resp, prod3.title)
+
+    def FIX_test_add_category_to_product(self):
+        ''' test add category to product '''
+        p_title = 'product'
+        category = Category.objects.create(title='category2')
+        Product.objects.create(title=p_title).save()
+        self.client.post(
+            reverse('catalog:product_edit', kwargs={'product_slug': p_title}),
+            {
+                'title': p_title,
+                'category': category.pk
+            })
+        assert Product.objects.count() == 1
+        assert category.title == Product.objects.first().category

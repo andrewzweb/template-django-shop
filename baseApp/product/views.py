@@ -5,9 +5,14 @@ from cart.forms import CartAddProductForm, CartAddProductHideQuantityForm
 from product.forms import ProductForm
 
 
-def product_list(request):
-    products = Product.objects.all()
-    categories = Category.objects.all()
+def product_list(request, category_slug=None):
+    if category_slug:
+        target_category = Category.objects.get(category_slug=category_slug)
+        categories = Category.objects.all()
+        products = Product.objects.filter(category=target_category)
+    else:
+        categories = Category.objects.all()
+        products = Product.objects.all()
     cart_product_form = CartAddProductHideQuantityForm()
     return render(request, 'product/list.html', locals())
 
@@ -22,8 +27,6 @@ def product_item(request, product_slug):
 def product_add(request):
     form = ProductForm()
     if request.method == "POST":
-        title = request.POST['title']
-        price = request.POST['price']
         form = ProductForm(request.POST)
         if form.is_valid():
             form.save()

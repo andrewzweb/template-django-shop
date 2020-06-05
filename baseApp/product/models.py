@@ -22,7 +22,7 @@ class Product(models.Model):
 class Category(models.Model):
     ''' category model '''
 
-    title = models.CharField(max_length=200, default='', blank=False)
+    title = models.CharField(max_length=200, default='', blank=False, unique=True)
     category_slug = models.SlugField(max_length=200, default='', blank=True, null=True)
 
     def __str__(self):
