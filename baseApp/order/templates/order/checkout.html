@@ -1,0 +1,85 @@
+{% extends 'shop/base.html' %}
+{% load static %}
+
+{% block title %}Checkout{% endblock %}
+
+{% block content %}
+  <link href="{% static 'order/css/checkout.css' %}" rel="stylesheet"/>
+
+  <section id="checkout">
+	<h1>checkout</h1>
+	<div class="checkout-wrapper">
+	  <div class="detail">
+		<div class="buy-holder">
+		  <form action="." method="post" class="order-form">
+			{{ form.as_p }}
+			<input class="buy" type="submit" value="Place order ${{ cart.get_total_price }}">
+			{% csrf_token %}
+		  </form>
+		</div>
+
+		<!-- 
+		<div class="shipping-detail">
+		  <h3>shipping detail</h3>
+		  <div class="name">Josh Doe</div>
+		  <div class="email">josh.doe@gmail.com</div>
+		  <div class="addres">Washington 15a</div>
+		</div>
+		<div class="payment-detail">
+		  <h3>payment detail</h3>
+		  <div class="card-owner">Josh Doe</div>
+		  <div class="card-number">4355 2324 0945 9983</div>
+		  <div class="card-date">20/12</div>
+		  <div class="card-cvv">212</div>
+		</div>
+		-->
+	  </div>
+
+	  <div class="order">
+		<h3>Your order</h3>
+
+		{% if cart %}
+		  {% for item in cart %}
+			<div class="order__item item">
+			  <div class="item__image">
+				{% if item.product.image %}
+				  <img alt="" src="{{ item.product.image.url }}"/>
+				{% else %}
+				  <img alt="" src="{% static 'shop/no-image.png' %}"/>
+				{% endif %}
+			  </div>
+			  <div class="item__title">
+				  <a href="">{{ item.product.title }}</a>
+			  </div>
+			  <div class="item__quantity">
+				  <span>{{ item.quantity }}</span>
+			  </div>
+			  <div class="item__price">
+				  <span>${{ item.total_price }}</span>
+			  </div>
+			</div>
+		  {% endfor %}
+		{% else %}
+		  <p>Now nothing in order...</p>
+		{% endif %}
+
+		<div class="order__summary">
+		  <div class="subtotal">
+			<p>subtotal</p>
+			<span>${{ cart.get_total_price }}</span>
+		  </div>
+		  <div class="shipping">
+			<p>delivery</p>
+			<span>$ 2.00</span>
+		  </div>
+		  <div class="total">
+			<p>total</p>
+			<span>${{ cart.get_total_price }}</span>
+		  </div>
+		</div>
+
+	  </div>
+	</div>
+  </section>
+{% endblock %}
+

@@ -1,0 +1,41 @@
+{% extends 'shop/base.html' %}
+{% load static %}
+
+{% block title %}Catalog{% endblock %}
+
+{% block products %}
+  <link href="{% static "product/product-list.css" %}" rel="stylesheet"/>
+
+  {% if products %}
+  {% for product in products %}
+	<div class="product product-item">
+	  <div class="product__image">
+		{% if product.image %}
+		  <img alt="" src="{{ product.image.url }}"/>
+		{% else %}
+		  <img alt="" src="{% static 'shop/no-image.png' %}"/>
+		{% endif %}
+	  </div>
+	  <div class="product__title">{{ product.title }}</div>
+	  <div class="product__category">Category: {{ product.category }}</div>	  
+	  {% if product.price %}
+	  <div class="product__price">Price: {{ product.price }} $</div>	  
+	  {% endif %}
+	  <div class="product__actions actions">
+		<div class="actions__view">
+		  <a href="{% url 'catalog:item' product_slug=product.slug %}">view detail</a>
+		</div>
+		<div class="actions__add">
+		  <form action="{% url "cart:cart_add" product.id %}" method="POST">
+			{% csrf_token %}
+			{{ cart_product_form }}
+			<button type="submit">Add to cart</button>
+		  </form>
+		</div>
+	  </div>
+	</div>
+  {% endfor %}
+  {% else %}
+  <div>Products soon be here...</div>
+  {% endif %}
+{% endblock %}

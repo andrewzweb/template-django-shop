@@ -1,0 +1,60 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+  <head>
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" charset="UTF-8"/>
+	<link href="{% static 'shop/fontawesome-free-5.13.0-web/css/all.css' %}" rel="stylesheet"/>
+	<link href="{% static 'shop/base.css' %}" rel="stylesheet"/>
+	<title>{% block title %}{% endblock %}</title>
+
+  </head>
+  <body>
+	<div id="header" class="sticky-top">
+	  <div class="nav">
+		<a href="{% url 'catalog:list' %}">Catalog</a>
+		<a href="#">Popular</a>
+		<a href="#">Products</a>
+		<a href="#">Sale</a>
+	  </div>
+	  <div class="logo"><a href="{% url 'catalog:list' %}"><i class="far fa-gem"></i><span>Shop</span></a></div>
+	  <div class="user-menu">
+		<a href=""><i class="far fa-heart"></i></a>
+		<a href="{% url 'account:detail' %}"><i class="far fa-user"></i></a>
+		<a class="link-to-cart" href="{% url 'cart:cart_detail' %}">
+		<i class="fas fa-shopping-cart"></i>
+		{% with total_items=cart|length %}
+		  {% if cart|length > 0 %}
+			<span class="count-item--exist">{{ total_items }}</span>
+		  {% else %}
+			<span></span>
+		  {% endif %}
+		{% endwith %}
+		</a>
+	  </div>
+	</div>
+
+	<div id="content">
+	  {% block content %}
+	  {% endblock %}
+
+	  {% block products %}
+	  {% endblock %}
+	  
+	  {% block product %}
+	  {% endblock %}
+
+	  {% block cart %}
+	  {% endblock %}
+	</div>
+
+
+	<div id="footer">
+	  <div class="copirights">© 2020 All rights reserved. Designed by AndrewZweb.</div>
+	</div>
+
+	<!-- css and js -->
+  </body>
+</html>
+
+

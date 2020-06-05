@@ -1,0 +1,16 @@
+
+* Shop 
+
+Scope of project: 
+build simple template for shop based on django 
+
+- [0/5] baseApp 
+  - [ ] shop
+	- [ ] base template we're show blocks
+  - [ ] products
+	- [ ] product-template
+	  - [ ] product-list
+	  - [ ] product-item
+  - [ ] cart
+  - [ ] order
+

@@ -1,0 +1,18 @@
+{% extends 'shop/base.html' %}
+{% load static %}
+
+{% block title %}Edit: {{product.title}}{% endblock %}
+
+{% block product %}
+<link href="{% static "product/product-add.css" %}" rel="stylesheet"/>
+
+<h2>Edit product</h2>
+
+<div class="product product-item">
+  <form method="POST">
+    {{ form }}
+    {% csrf_token %}
+    <input name="edit" type="submit" value="Edit Product"/>
+  </form>
+</div>
+{% endblock %}

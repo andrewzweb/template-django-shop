@@ -1,0 +1,41 @@
+{% extends 'shop/base.html' %}
+{% load static %}
+
+{% block title %}Delete: {{product.title}}{% endblock %}
+
+{% block product %}
+<link href="{% static "product/product-add.css" %}" rel="stylesheet"/>
+
+<h2>Confirm delete item: {{product.title}}</h2>
+
+<div class="product product-item">
+  {% if product.image %}
+  <div class="product__image">
+	{% if product.image %}
+	<img alt="" src="{{ product.image.url }}"/>
+	{% else %}
+	<img alt="" src="{% static 'shop/no-image.png' %}"/>
+	{% endif %}
+  </div>
+  {% endif %}
+  <div class="product__title">{{ product.title }}</div>
+  {% if product.price %}
+  <div class="product__price">Price: {{ product.price }}</div>	  
+  {% endif %}
+  
+  <div class="actions">
+    <div class="actions__">
+      <a href="{% url 'catalog:product_edit' product_slug=product.slug %}">Edit</a>
+    </div>
+
+    <div class="actions__delete">
+	  <form action="{% url 'catalog:product_del' product.slug %}" method="POST">
+		{% csrf_token %}
+        <input name="delete" type="submit" value="Confirm delete"/>
+	  </form>
+	</div>
+  </div>
+</div>
+{% endblock %}
+
+

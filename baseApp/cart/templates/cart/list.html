@@ -1,0 +1,23 @@
+{% extends 'shop/base.html' %}
+{% load static %}
+
+{% block cart %}
+  <h2>Cart</h2>
+  
+  {% if products %}
+	{% for product in products %}
+	  <div class="product product-item">
+		<div class="product__image">
+		  {% if product.image %}
+			<img alt="" src="{{ product.image.url }}"/>
+		  {% endif %}
+		</div>
+		<div class="product__title">{{ product.title }}</div>
+		<div class="product__price">{{ product.price }}</div>	  
+		<a href="{% url 'catalog:item' product_slug=product.slug %}">view detail</a>
+	  </div>
+	{% endfor %}
+  {% else %}
+	<div>Cart is empty...</div>
+  {% endif %}
+{% endblock %}

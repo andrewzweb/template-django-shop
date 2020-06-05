@@ -1,0 +1,100 @@
+body, html{
+	margin: 0;
+	padding: 0;
+}
+
+body, html{
+	display: flex;
+	flex-flow: column nowrap;
+	justify-content: space-between;
+	width: 100%;
+	min-height: 100vh;
+}
+
+a{
+	text-decoration: none;
+	color: #333;
+}
+
+#header {
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: space-between;
+	align-items: center;
+	border-bottom: 1px solid #999;
+}
+
+#header{
+	padding: 1rem;
+}
+
+#header .logo {
+	display: flex;
+	align-items: center;
+}
+
+#header .logo i {
+	font-size: 2rem;
+	color: #333;
+	padding: 0.5rem;
+}
+
+#header .logo span {
+	font-size: 1.2rem;
+	font-weight: bold;
+}
+#header .nav a {
+	padding: 0 0.5rem;
+}
+
+#header .user-menu a{
+	padding: 0 1rem;
+}
+
+#footer {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 0.8rem;
+	padding: 1rem 0;
+	box-sizing: border;
+	border-top: 1px solid #999
+}
+
+#content {
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: start;
+	align-items: start;
+	min-height: 70vh;
+}
+
+
+
+@media screen and (max-width: 600px) {
+	#header .nav {
+		display: none;
+	}
+}
+
+@media screen and (max-width: 400px) {
+	#header .nav {
+		opacity: 1;
+	}
+}
+
+.link-to-cart{
+	position: relative;
+}
+
+.link-to-cart .count-item--exist {
+	background-color: red;
+	color: white;
+	border-radius: 20%;
+	padding: 0.1rem;
+	position: absolute;
+	top: -0.5rem;
+	right: 0;
+	font-size: 0.6rem;
+	font-weight: bold;
+}
