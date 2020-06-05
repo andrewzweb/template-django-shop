@@ -1,17 +1,19 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse
-from product.models import Product
+from product.models import Product, Category
 from cart.forms import CartAddProductForm, CartAddProductHideQuantityForm
 from product.forms import ProductForm
 
 
 def product_list(request):
     products = Product.objects.all()
+    categories = Category.objects.all()
     cart_product_form = CartAddProductHideQuantityForm()
     return render(request, 'product/list.html', locals())
 
 
 def product_item(request, product_slug):
+    categories = Category.objects.all()
     product = Product.objects.get(slug=str(product_slug))
     cart_product_form = CartAddProductForm()
     return render(request, 'product/item.html', locals())
@@ -25,7 +27,6 @@ def product_add(request):
         form = ProductForm(request.POST)
         if form.is_valid():
             form.save()
-
         return redirect(reverse('catalog:list'))
     return render(request, 'product/add.html', {'form': form})
 

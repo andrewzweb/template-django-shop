@@ -1,9 +1,8 @@
 #content{
-	width: 100%;
-	min-height: 100%;
 	display: flex;
 	flex-flow: row wrap;
 	justify-content: center;
+    align-content: flex-start;
 	align-items: stretch;
 }
 
@@ -49,21 +48,20 @@
 	flex-flow: row wrap;
 	justify-content: space-between;
 	align-items: center;
+    margin-top: 1rem;
 }
 
-.actions div {
-	padding: 0.5rem 1rem;
-	border-radius: 5px;
-	margin: 0.3rem;
+.actions div{
+    padding: 1rem 1.5rem;
 }
 
-.actions__add {
-	background: green;
-}
 
-.actions__add a {
+.actions__add form input{
 	color: white;
+    background-color: green;
+    border: none;
 }
+
 
 .actions__view {
 	border: 1px solid green;
