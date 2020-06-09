@@ -9,7 +9,7 @@
 <h2>Add product</h2>
 
 <div class="product product-item">
-  <form method="POST">
+  <form method="POST" accept-charset="utf-8" enctype="multipart/form-data">
     {{ form }}
     {% csrf_token %}
     <input name="add" type="submit" value="Add Product"/>

@@ -27,7 +27,7 @@ def product_item(request, product_slug):
 def product_add(request):
     form = ProductForm()
     if request.method == "POST":
-        form = ProductForm(request.POST)
+        form = ProductForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
         return redirect(reverse('catalog:list'))
@@ -39,7 +39,7 @@ def product_edit(request, product_slug):
 
     form = ProductForm(instance=product)
     if request.method == "POST":
-        new_form = ProductForm(request.POST, instance=product)
+        new_form = ProductForm(request.POST, request.FILES, instance=product)
         if new_form.is_valid():
             new_form.save()
             return redirect(reverse('catalog:item',
