@@ -9,8 +9,7 @@ urlpatterns = [
     path('account/', include('account.urls', namespace='account')),
     path('order/', include('order.urls', namespace='order')),
     path('', include('product.urls', namespace='catalog')),
-] 
+]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-

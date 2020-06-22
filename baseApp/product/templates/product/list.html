@@ -11,9 +11,9 @@
 	<div class="product product-item">
 	  <div class="product__image">
 		{% if product.image %}
-		  <img alt="" src="{{ product.image.url }}"/>
+		<img alt="" src="{{ product.image.url }}"/>
 		{% else %}
-		  <img alt="" src="{% static 'shop/no-image.png' %}"/>
+		<img alt="" src="{% static 'shop/no-image.png' %}"/>
 		{% endif %}
 	  </div>
 	  <div class="product__title">{{ product.title }}</div>
@@ -29,7 +29,7 @@
 		  <form action="{% url "cart:cart_add" product.id %}" method="POST">
 			{% csrf_token %}
 			{{ cart_product_form }}
-			<button type="submit">Add to cart</button>
+            <input name="submit" type="submit" value="Add to cart"/>
 		  </form>
 		</div>
 	  </div>

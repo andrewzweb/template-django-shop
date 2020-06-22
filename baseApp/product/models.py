@@ -23,6 +23,11 @@ class Category(models.Model):
     ''' category model '''
 
     title = models.CharField(max_length=200, default='', blank=False, unique=True)
+    category_slug = models.SlugField(max_length=200, default='', blank=True, null=True)
 
     def __str__(self):
         return self.title
+
+    def save(self, *args, **kwargs):
+        self.category_slug = slugify(self.title)
+        return super(Category, self).save(*args, **kwargs)

@@ -11,10 +11,8 @@ body, html{
 	min-height: 100vh;
 }
 
-a{
-	text-decoration: none;
-	color: #333;
-}
+
+/* ===== main ===== */
 
 #header {
 	display: flex;
@@ -22,33 +20,6 @@ a{
 	justify-content: space-between;
 	align-items: center;
 	border-bottom: 1px solid #999;
-}
-
-#header{
-	padding: 1rem;
-}
-
-#header .logo {
-	display: flex;
-	align-items: center;
-}
-
-#header .logo i {
-	font-size: 2rem;
-	color: #333;
-	padding: 0.5rem;
-}
-
-#header .logo span {
-	font-size: 1.2rem;
-	font-weight: bold;
-}
-#header .nav a {
-	padding: 0 0.5rem;
-}
-
-#header .user-menu a{
-	padding: 0 1rem;
 }
 
 #footer {
@@ -64,23 +35,71 @@ a{
 #content {
 	display: flex;
 	flex-flow: row wrap;
-	justify-content: start;
-	align-items: start;
+	justify-content: flex-start;
+	align-items: flex-start;
 	min-height: 70vh;
 }
 
+a {
+    text-decoration: none;
+    color: white;
+}
+
+/* ===== header-logo  ===== */
+
+.header__logo {
+	display: flex;
+	align-items: center;
+    margin: 1rem;
+}
+
+.header__logo a {
+    text-decoration: none;
+}
+
+.header__logo i {
+	font-size: 2rem;
+	color: #333;
+	padding: 0.5rem;
+}
+
+.header__logo span {
+	font-size: 1.2rem;
+	font-weight: bold;
+}
+
+/* ===== header-nav  ===== */
+
+.header__nav {
+    margin: 1.5rem;
+}
+
+.header__nav a {
+	padding: 0 0.5rem;
+    text-decoration: none;
+}
 
 
-@media screen and (max-width: 600px) {
+/* ===== header-usermenu  ===== */
+
+.header__user-menu {
+    margin: 1.5em;
+}
+
+.header__user-menu a{
+	padding: 0 1rem;
+    text-decoration: none;
+}
+
+
+@media only screen and (max-width: 800px) {
 	#header .nav {
 		display: none;
 	}
-}
 
-@media screen and (max-width: 400px) {
-	#header .nav {
-		opacity: 1;
-	}
+    .categories .category a{
+        display: none;
+    }
 }
 
 .link-to-cart{
@@ -97,4 +116,32 @@ a{
 	right: 0;
 	font-size: 0.6rem;
 	font-weight: bold;
+}
+
+
+
+/* catgories */
+
+#header .categories{
+    width: 100%;
+    border-top: 1px solid #333;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+}
+
+#header .category {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.category a {
+    padding: 0.5rem 1rem;
+    margin: 0.5rem 1rem;
+    text-decoration: none;
+    text-transform: uppercase;
 }
