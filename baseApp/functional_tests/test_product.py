@@ -4,6 +4,7 @@ from django.urls import reverse
 from product.models import Product, Category
 import time
 
+
 class ProductItemTest(FunctionalTest):
     ''' test product item'''
 
@@ -27,6 +28,7 @@ class ProductItemTest(FunctionalTest):
 
         # and see
         assert str('Not Found') in self.browser.page_source
+
 
 class AddProductTest(FunctionalTest):
     ''' test add product item'''
@@ -55,7 +57,7 @@ class AddProductTest(FunctionalTest):
         # typing a price of product what we want add 
         self.browser.find_element_by_name('price').send_keys(product_price)
 
-        # click to submit  
+        # click to submit
         find_submit = self.browser.find_element_by_name('add').click()
 
         # when browser redirect to main page and can see title

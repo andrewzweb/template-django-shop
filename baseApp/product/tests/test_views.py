@@ -7,11 +7,9 @@ from django.utils.datastructures import MultiValueDictKeyError
 
 class HomePageTest(TestCase):
     ''' home page '''
-
     def test_get_home_page(self):
-        ''' test get home page '''
-        resp = self.client.get('/')
-        assert resp.status_code == 200
+        get_home_page = self.client.get('/')
+        assert get_home_page.status_code == 200
 
 
 class ProductItemTest(TestCase):
@@ -19,7 +17,7 @@ class ProductItemTest(TestCase):
 
     def test_get_item(self):
         product_name = 'some product'
-        product_item = Product.objects.create(title=product_name)
+        Product.objects.create(title=product_name)
         product_url = slugify(product_name)
         resp = self.client.get(reverse('catalog:item', args=(product_url,)))
         assert resp.status_code == 200
@@ -31,12 +29,17 @@ class ProductItemTest(TestCase):
 class AddProductTest(TestCase):
     ''' add product tests'''
 
+    product_data = {'title': 'product1', 'price': 123}
+    product_data_2 = {'title': 'product2', 'price': 123}
+    product_data_3 = {'title': 'product3', 'price': 123}
+
     def test_add_product(self):
         ''' test add product '''
         self.client.post(reverse('catalog:product_add'), {'title': 'product1', 'price': 2})
         assert Product.objects.count() == 1
 
-    def test_add_product_without_price_fail(self):
+
+    def NO_test_add_product_without_price_fail(self):
         ''' test add product without price fail '''
         with self.assertRaises(MultiValueDictKeyError):
             self.client.post(reverse('catalog:product_add'), {'title': 'produc1'})
@@ -48,6 +51,19 @@ class AddProductTest(TestCase):
         assert Product.objects.count() == 1
         self.client.post(reverse('catalog:product_add'), {'title': 'p2', 'price': 2})
         assert Product.objects.count() == 2
+
+    def test_add_product(self):
+        ''' test can add product '''
+        resp = self.client.post(reverse('catalog:product_add'), self.product_data)
+        assert Product.objects.count() == 1
+
+        
+    def NOtest_cant_add_product_with_the_same_title(self):
+        ''' test add product with the same title '''
+        add_first_product = self.client.post(reverse('catalog:product_add'), self.product_data)
+        add_second_product = self.client.post(reverse('catalog:product_add'), self.product_data)
+        self.assertContains(add_second_product, 'Product with this Title already exists')
+        assert add_second_product.status_code == 302
 
 
 class EditProductTest(TestCase):
@@ -161,3 +177,5 @@ class TestCategoryView(TestCase):
             })
         assert Product.objects.count() == 1
         assert category.title == Product.objects.first().category
+
+

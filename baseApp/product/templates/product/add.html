@@ -1,20 +1,26 @@
 {% extends 'shop/base.html' %}
 {% load static %}
 
-{% block title %}Catalog: {{product.title}}{% endblock %}
+{% block title %}Add product{% endblock %}
 
-{% block product %}
+{% block content %}
 <link href="{% static "product/product-add.css" %}" rel="stylesheet"/>
 
-<h2>Add product</h2>
-
 <div class="product product-item">
+  <h2>Add product</h2>
+
+  {% if form.subject.errors %}
+  <ol>
+    {% for error in form.subject.errors %}
+	<li><strong>{{ error|escape }}</strong></li>
+    {% endfor %}
+  </ol>
+  {% endif %}
+  
   <form method="POST" accept-charset="utf-8" enctype="multipart/form-data">
-    {{ form }}
-    {% csrf_token %}
-    <input name="add" type="submit" value="Add Product"/>
+	{{ form.as_p }}
+	{% csrf_token %}
+	<button name="add" type="submit">add product</button>
   </form>
 </div>
 {% endblock %}
-
-
