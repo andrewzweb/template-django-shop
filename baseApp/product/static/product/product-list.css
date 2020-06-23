@@ -60,13 +60,13 @@
 }
 
 .actions__add form input{
-	color: white;
+	color: black;
     background-color: green;
     border: none;
 }
 
-
 .actions__view {
 	border: 1px solid green;
+    color: black;
 }
 

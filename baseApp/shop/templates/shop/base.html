@@ -11,57 +11,97 @@
   </head>
   <body>
 	<div id="header" class="sticky-top">
-	  <div class="header__nav nav">
-    	<a href="{% url 'catalog:list' %}">Catalog</a>
-    	<a href="#">Products</a>
-		<a href="#">Sale</a>
-	  </div>
-	  <div class="header__logo logo"><a href="{% url 'catalog:list' %}"><i class="far fa-gem"></i><span>Shop</span></a></div>
-	  <div class="header__user-menu user-menu">
-		<a href=""><i class="far fa-heart"></i></a>
-		<a href="{% url 'account:detail' %}"><i class="far fa-user"></i></a>
-		<a class="link-to-cart" href="{% url 'cart:cart_detail' %}">
-		  <i class="fas fa-shopping-cart"></i>
-		  {% with total_items=cart|length %}
-		  {% if cart|length > 0 %}
-		  <span class="count-item--exist">{{ total_items }}</span>
-		  {% else %}
-		  <span></span>
-		  {% endif %}
-		  {% endwith %}
-		</a>
-	  </div>
-
-      {% if categories %}
-      <div class="categories">
-        <i class="far fa-bars"></i>
-        <div class="category">
-          {% for category in categories %}
-          <a href="{% url 'catalog:filter_by_category' category.category_slug %}">{{ category.title }}</a>
-          {% endfor %}
+      <div class="simple-header header__nav nav">
+        <div class="search">
+		  <i class="fas fa-search"></i>
+          <form action="search" method="POST">
+            <input name="search" type="text" placeholder="Search" value=""/>
+          </form>
+        </div>
+        <div class="cart">
+		  <a class="link-to-cart" href="{% url 'cart:cart_detail' %}">
+		    <i class="fas fa-shopping-cart"></i>
+            <p>Cart</p>
+		    {% with total_items=cart|length %}
+		    {% if cart|length > 0 %}
+            <span>({{ total_items }})</span>
+		    {% else %}
+		    <span>(0)</span>
+		    {% endif %}
+		    {% endwith %}
+		  </a>
         </div>
       </div>
-      {% endif %}
+      <div class="header__logo logo">
+        <h1>Simple</h1>
+      </div>
     </div>
 
     
 	<div id="content">
-	  {% block content %}
-	  {% endblock %}
+      <div class="site-bar">
+        <i class="far fa-bars icon"></i>
+        <div class="categories">
+          <div class="category">
+    	    <a href="{% url 'catalog:list' %}">Home</a>
+          </div>
+          {% for category in categories %}
+          <div class="category">
+            <a href="{% url 'catalog:filter_by_category' category.category_slug %}">{{ category.title }}</a>
+          </div>
+          {% endfor %}
 
-	  {% block products %}
-	  {% endblock %}
-	  
-	  {% block product %}
-	  {% endblock %}
+          <div class="social-link">
+            <a href="facebook.com">
+              <i class="fab fa-facebook-square"></i>
+            </a>
+            <a href="twitter">
+              <i class="fab fa-twitter"></i>
+            </a>
+            <a href="instagram">
+		      <i class="fab fa-instagram" aria-hidden="true"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+      
+      <div class="content">
+	    {% block content %}
+	    {% endblock %}
 
-	  {% block cart %}
-	  {% endblock %}
+	    {% block products %}
+	    {% endblock %}
+	    
+	    {% block product %}
+	    {% endblock %}
+
+	    {% block cart %}
+	    {% endblock %}
+      </div>
 	</div>
 
 
 	<div id="footer">
-	  <div class="copirights">© 2020 All rights reserved. Designed by AndrewZweb.</div>
+      <div class="info">
+        <div class="links">
+          <h3>Links</h3>
+          <a href="">Search</a>
+          <a href="">Our Story</a>
+          <a href="">News</a>
+          <a href="">Contact Us</a>
+        </div>
+
+        <div class="subscribe">
+          <h3>Be in the know</h3>
+          <p>Promotions, new products and sales. Directly to your inbox.</p>
+          <form action="">
+            <input name="" type="text" value="" placeholder="Your email"/>
+            <input name="" type="button" value="SUBSCRIBE"/>
+          </form>
+        </div>
+      </div>
+      
+	  <div class="copyrights">© 2020 All rights reserved. Designed by AndrewZweb.</div>
 	</div>
 
 	<!-- css and js -->
