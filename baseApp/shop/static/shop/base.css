@@ -59,6 +59,16 @@ a {
     color: #333;
 }
 
+.menu{
+    visibility: hidden;
+    position: absolute;
+    text-align: center;
+}
+
+.menu i {
+    font-size: 1.5rem;
+}
+
 @media only screen and (max-width: 800px) {
     .content {
         min-width: 100%;
@@ -66,8 +76,26 @@ a {
     .site-bar {
         min-width: 100%;
     }
+
+    .categories .category{
+        display: none;
+    }
+
+    .social-link {
+        display: none;
+    }
+    
+    .menu{
+        visibility: visible;
+        display: block;
+        position: relative;
+        min-width: 100%;
+    }
 }
 
+.menu:hover ~ .categories .category {
+    display: block;
+}
 
 #content {
     width: 100%;
@@ -85,7 +113,6 @@ a {
 .content {
     width: 80%;
 }
-
 
 
 /* site-bar & category */
@@ -117,10 +144,6 @@ a {
 .social-link a i {
     font-size: 1.2rem;
     padding: 0.3rem;
-}
-
-.site-bar .icon{
-    display: none;
 }
 
 .categories a:hover{
