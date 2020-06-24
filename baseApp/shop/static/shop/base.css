@@ -60,13 +60,10 @@ a {
 }
 
 @media only screen and (max-width: 800px) {
-    .categories{
-        display: none;
-    }
-    .site-bar i {
-        display: block;
-    }
     .content {
+        min-width: 100%;
+    }
+    .site-bar {
         min-width: 100%;
     }
 }
@@ -75,6 +72,7 @@ a {
 #content {
     width: 100%;
 	display: flex;
+    flex-flow: row wrap;
 	justify-content: flex-start;
 	align-items: flex-start;
 	min-height: 70vh;
@@ -133,14 +131,14 @@ a {
 
 #footer {
 	display: flex;
-    flex-flow: column nowrap;
+    flex-flow: column wrap;
     padding: 1rem 0;
     border-top: 1px solid #eee;
 }
 
 #footer .info {
 	display: flex;
-    flex-flox: row wrap;
+    flex-flow: row wrap;
 	justify-content: space-between;
 	align-items: flex-start;
     padding: 1rem;

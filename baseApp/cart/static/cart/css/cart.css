@@ -1,14 +1,15 @@
 .content{
-	margin: 1rem auto;
-    padding: 1rem 0;
     border-top: 1px solid #eee;
-
+    margin: 1rem auto;
 }
 
 table {
+    display: table;
 	width: calc(100% - 1rem);
 	border-collapse: collapse;
+    margin: 0 auto;
 }
+
 
 .title-page{
     width: calc(100% - 2rem);
@@ -20,7 +21,7 @@ table {
     text-align: left;
 }
 
-.product__price, .product__amount, .product__quantity {
+.product__price, .product__total, .product__quantity {
     text-align: right;
 }
 
@@ -72,7 +73,6 @@ thead tr {
     color: #666;
 }
 
-
 .active-button{
 	padding: 2em 0;
 }
@@ -83,7 +83,6 @@ thead tr {
 	margin-right: 1.5rem;
 }
 
-
 .extra {
     padding: 2rem 0;
 }
@@ -91,4 +90,68 @@ thead tr {
 .extra textarea {
     font-size: 1rem;
     width: calc(100% - 1rem);
+}
+
+
+/* Media for mobile */
+@media 
+only screen and (max-width: 760px),
+(min-device-width: 768px) and (max-device-width: 1024px)  {
+
+	/* Force table to not be like tables anymore */
+	table, thead, tbody, th, td, tr { 
+		display: block;
+	}
+	
+	/* Hide table headers (but not display: none;, for accessibility) */
+	thead tr { 
+		position: absolute;
+		top: -9999px;
+		left: -9999px;
+	}
+	
+	tr { border-top: 1px solid #ccc; }
+	
+	td { 
+		/* Behave  like a "row" */
+		border: none;
+		position: relative;
+		padding-left: 50%;
+        padding: 0.5rem 0;
+	}
+	
+	td:before { 
+		/* Now like a table header */
+		position: absolute;
+		/* Top/left values mimic padding */
+		top: 6px;
+		left: 6px;
+		width: 30%;
+        text-align: left;
+		padding-right: 10px; 
+		white-space: nowrap;
+	}
+
+	tr td:nth-of-type(1){
+        display: block;
+        text-align: center;
+    }
+
+    tr:last-child td:nth-of-type(1) {
+        padding: 1rem;
+    }
+	tr:last-child td:nth-of-type(2):before { content: " "; }
+	tr:last-child td:nth-of-type(3):before { content: " "; }
+	tr:last-child td:nth-of-type(4):before { content: " "; }
+	tr:last-child td:nth-of-type(3) {
+        text-align: center;
+    }
+
+	/*
+	Label the data
+	*/
+	td:nth-of-type(2):before { content: "Quantity"; }
+	td:nth-of-type(3):before { content: "Price"; }
+	td:nth-of-type(4):before { content: "Total"; }
+
 }

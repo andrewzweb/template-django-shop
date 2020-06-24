@@ -40,14 +40,14 @@
 			  </form>
 			</td>
 			<td class="product__price">${{ item.price }}</td>
-			<td class="product__amount">${{ item.total_price }}</td>
+			<td class="product__total">${{ item.total_price }}</td>
 		  </tr>
 		{% endwith %}
 	  {% endfor %}
-	  <tr class="total">
+	  <tr class="subtotal">
 		<td>Subotal</td>
 		<td colspan="2"></td>
-		<td class="total__amount">${{ cart.get_total_price }}</td>
+		<td class="subtotal__amount">${{ cart.get_total_price }}</td>
 	  </tr>
 	</tbody>
   </table>
