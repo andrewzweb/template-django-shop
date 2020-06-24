@@ -4,8 +4,12 @@
 {% block title %}Catalog{% endblock %}
 
 {% block products %}
-  <link href="{% static "product/product-list.css" %}" rel="stylesheet"/>
+<link href="{% static "product/product-list.css" %}" rel="stylesheet"/>
 
+  {% if target_category %}
+    <h3>{{ target_category }}</h3>
+  {% endif %}
+  
   {% if products %}
   {% for product in products %}
 	<div class="product product-item">
@@ -17,9 +21,8 @@
 		{% endif %}
 	  </div>
 	  <div class="product__title">{{ product.title }}</div>
-	  <div class="product__category">Category: {{ product.category }}</div>	  
 	  {% if product.price %}
-	  <div class="product__price">Price: {{ product.price }} $</div>	  
+	  <div class="product__price">${{ product.price }}</div>	  
 	  {% endif %}
 	  <div class="product__actions actions">
 		<div class="actions__view">

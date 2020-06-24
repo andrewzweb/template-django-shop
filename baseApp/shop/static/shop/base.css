@@ -75,7 +75,6 @@ a {
 #content {
     width: 100%;
 	display: flex;
-	flex-flow: row wrap;
 	justify-content: flex-start;
 	align-items: flex-start;
 	min-height: 70vh;
@@ -104,7 +103,7 @@ a {
 .category{
     border-top: 1px solid #eee;
     padding: 1rem;
-    width: 100%;
+    width: calc(100% - 2rem);
 };
 
 .category a {
@@ -114,7 +113,7 @@ a {
 .social-link{
     border-top: 1px solid #eee;
     padding: 1rem;
-    width: 100%;
+    width: calc(100% - 2rem);
 }
 
 .social-link a i {

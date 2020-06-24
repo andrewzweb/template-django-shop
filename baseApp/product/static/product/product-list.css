@@ -1,9 +1,17 @@
-#content{
+.content{
 	display: flex;
 	flex-flow: row wrap;
-	justify-content: center;
+	justify-content: flex-start;
     align-content: flex-start;
 	align-items: stretch;
+    margin: 1rem;
+    border-top: 1px solid #eee;
+}
+
+.content h3 {
+    width: 100%;
+    padding: 1rem 0;
+    color: #333;
 }
 
 .product{
@@ -11,10 +19,9 @@
 	flex-flow: column wrap;
 	justify-content: space-between;
 	align-items: center;
-	margin: 0.5rem 1rem;
-	background: #eee;
+	margin: 1rem;
 	max-height: 400px;
-	box-shadow: 5px 5px 20px black;
+	box-shadow: 3px 3px 20px #999;
 	transition: 0.5s
 }
 
@@ -32,13 +39,13 @@
 
 .product__image {
 	width: 300px;
-	max-height: 100%;
+
 }
 
 .product__image img {
 	width: 100%;
 	max-height: 200px;
-	object-fit: cover;
+	object-fit: contain;
 	object-position: 50% 50%;
 } 
 
@@ -56,17 +63,16 @@
 }
 
 .actions__add {
-    background-color: green;
+    background-color: #333;
 }
 
 .actions__add form input{
-	color: black;
-    background-color: green;
+	color: white;
+    background-color: #333;
     border: none;
 }
 
 .actions__view {
-	border: 1px solid green;
-    color: black;
+	border: 1px solid #333;
+    color: #333;
 }
-
