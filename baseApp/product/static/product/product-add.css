@@ -1,19 +1,14 @@
 .content {
-    width: 100%;
     display: flex;
-    flex-flow: column nowrap;
-    justify-content: flex-start;
-    align-items: center;
+    flex-flow: row wrap;
+    justify-content: center;
 }
 
 form{
     display: flex;
-    flex-flow: column nowrap;
-    justify-content: flex-start;
+    flex-flow: column wrap;
 }
 
 input{
     margin: 0.3rem 0;
 }
-
-

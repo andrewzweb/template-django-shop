@@ -6,9 +6,10 @@
 {% block product %}
 <link href="{% static "product/product-add.css" %}" rel="stylesheet"/>
 
-<h2>Confirm delete item: {{product.title}}</h2>
 
 <div class="product product-item">
+  <h2>Confirm delete item: </h2>
+  <h3>{{product.title}}</h3>
   {% if product.image %}
   <div class="product__image">
 	{% if product.image %}
