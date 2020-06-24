@@ -12,10 +12,8 @@
   <table class="cart">
 	<thead>
 	  <tr>
-		<th>Image</th>
 		<th>Product</th>
 		<th>Quantity</th>
-		<th>Remove</th>
 		<th>Unit price</th>
 		<th>Price</th>
 	  </tr>
@@ -23,14 +21,17 @@
 	<tbody>
 	  {% for item in cart %}
 		{% with product=item.product %}
-		  <tr>
-			<td class="product-image">
-			  <a href="{{ product.get_absolute_url }}">
-				<img  src="{% if product.image %}{{ product.image.url }}{% else %}{% static "shop/no-image.png" %}{% endif %}">
-			  </a>
-			</td>
-			<td>{{ product.title }}</td>
-			<td>
+		  <tr class="product">
+			<td class="product__data">
+              <div class="product__image">
+                <img alt="image-{{ product.title }}" src="{{ product.image.url }}"/>
+              </div>
+              <div class="product__title">
+                <p><a href="{{ product.get_absolute_url }}">{{ product.title }}</a></p>
+                <a href="{% url 'cart:cart_remove' product_id=product.id %}">Remove</a>
+              </div>
+            </td>
+			<td class="product__quantity">
  			  <form action="{% url 'cart:cart_add' product_id=product.id %}" method="post">
 				{{ item.update_quantity_form.quantity }}
 				{{ item.update_quantity_form.update }}
@@ -38,20 +39,24 @@
 				{% csrf_token %}
 			  </form>
 			</td>
-			<td><a href="{% url 'cart:cart_remove' product_id=product.id %}">Remove</a></td>
-			<td class="num">${{ item.price }}</td>
-			<td class="num">${{ item.total_price }}</td>
+			<td class="product__price">${{ item.price }}</td>
+			<td class="product__amount">${{ item.total_price }}</td>
 		  </tr>
 		{% endwith %}
 	  {% endfor %}
 	  <tr class="total">
-		<td>Total</td>
-		<td colspan="4"></td>
-		<td class="num">${{ cart.get_total_price }}</td>
+		<td>Subotal</td>
+		<td colspan="2"></td>
+		<td class="total__amount">${{ cart.get_total_price }}</td>
 	  </tr>
 	</tbody>
   </table>
 
+  <div class="extra">
+    <p>Special instructions for seller</p>
+    <textarea cols="30" id="" name="" rows="10"></textarea>
+  </div>
+  
   {% else %}
   <h2>Cart is empty</h2>
   {% endif %}
