@@ -1,28 +1,25 @@
 .product-item{
+    width: calc(100% - 2rem);
 	display: flex;
-	flex-flow: row wrap;
+    flex-direction: column;
 	justify-content: start;
 	align-items: start;
 	margin: 1rem;
 }
 
 .product__image {
-	max-width: 300px;
-	max-height: 200px;
 	margin: 0 auto;
 }
 
 .product__image img {
-	width: 100%;
-	height: 100%;
-	object-fit: cover;
+	object-fit: contain;
 	object-position: center center;
 } 
 
 .product__title {
 	padding: 1rem;
 	font-size: 1.5rem;
-	border-bottom: 1px solid #333;
+	border-bottom: 1px solid #eee;
 	min-width: calc(100% - 2rem);
 }
 
@@ -31,14 +28,43 @@
 	padding: 0.5rem;
 }
 
-
-.actions div {
+.actions div{
 	padding: 0.5rem 1rem;
 	border-radius: 5px;
 	margin: 0.3rem;
 }
 
+.actions__edit {
+    background-color: green;
+    text-align: center;
+}
+
+.actions__edit a{
+    color: white;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+.actions__delete {
+    background-color: red;
+    text-align: center;
+}
+
+.actions__delete a{
+    color: white;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+
 .actions__add {
-	background: green;
+    background-color: #333;
+}
+
+
+.actions__add form input{
+	color: white;
+    background-color: #333;
+    border: none;
 }
 

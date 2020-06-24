@@ -10,9 +10,12 @@
 
 <div class="product product-item">
   <form method="POST" accept-charset="utf-8" enctype="multipart/form-data">
+
+    <img alt="" src="/media/{{form.image.value}}"/>
     {{ form }}
     {% csrf_token %}
     <input name="edit" type="submit" value="Edit Product"/>
   </form>
+  <h3><a href="{% url 'catalog:item' product.slug %}"> < back to item</a></h3>
 </div>
 {% endblock %}

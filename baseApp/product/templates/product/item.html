@@ -1,47 +1,48 @@
 {% extends 'shop/base.html' %}
 {% load static %}
 
-{% block title %}Catalog: {{product.title}}{% endblock %}
+{% block title %}{{product.title}}{% endblock %}
 
 {% block product %}
-  <link href="{% static "product/product-item.css" %}" rel="stylesheet"/>
+<link href="{% static "product/product-item.css" %}" rel="stylesheet"/>
 
-  <div class="product product-item">
+<div class="product product-item">
+  {% if product.image %}
+  <div class="product__image">
 	{% if product.image %}
-	  <div class="product__image">
-		{% if product.image %}
-		  <img alt="" src="{{ product.image.url }}"/>
-		{% else %}
-		  <img alt="" src="{% static 'shop/no-image.png' %}"/>
-		{% endif %}
-	  </div>
+	<img alt="" src="{{ product.image.url }}"/>
+	{% else %}
+	<img alt="" src="{% static 'shop/no-image.png' %}"/>
 	{% endif %}
-	<div class="product__title">{{ product.title }}</div>
-	{% if product.price %}
-	<div class="product__price">Price: {{ product.price }}</div>	  
-	{% endif %}
-	<div class="product__category">{{ product.category }}</div>	  
-	
-	<div class="actions">
+  </div>
+  {% endif %}
+  <div class="product__title">{{ product.title }}</div>
+  {% if product.price %}
+  <div class="product__price">Price: {{ product.price }}</div>	  
+  {% endif %}
 
-      <div class="actions__edit">
-        <a href="{% url 'catalog:product_edit' product_slug=product.slug %}">Edit</a>
-      </div>
+  
+  <div class="actions">
 
-      <div class="actions__delete">
-        <a href="{% url 'catalog:product_del' product_slug=product.slug %}">Delete</a>
-      </div>
+    {% if user.is_authenticated %}
+    <div class="actions__edit">
+      <a href="{% url 'catalog:product_edit' product_slug=product.slug %}">Edit</a>
+    </div>
 
-      <div class="actions__add">
-
-		<form action="{% url "cart:cart_add" product.id %}" method="POST">
-		  {% csrf_token %}
-		  {{ cart_product_form }}
-		  <button type="submit">Add to cart</button>
-		</form>
-	  </div>
+    <div class="actions__delete">
+      <a href="{% url 'catalog:product_del' product_slug=product.slug %}">Delete</a>
+    </div>
+    {% endif %}
+    
+	<div class="actions__add">
+	  <form action="{% url "cart:cart_add" product.id %}" method="POST">
+		{% csrf_token %}
+		{{ cart_product_form }}
+        <input name="submit" type="submit" value="Add to cart"/>
+	  </form>
 	</div>
   </div>
+</div>
 {% endblock %}
 
 
