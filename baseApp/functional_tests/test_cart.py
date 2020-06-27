@@ -2,6 +2,7 @@ from .base import FunctionalTest
 from selenium.webdriver.support.ui import Select
 from django.urls import reverse
 import random
+from time import sleep
 
 
 class CartTest(FunctionalTest):
@@ -30,18 +31,16 @@ class CartTest(FunctionalTest):
 
         # Toni click to one of views-item
         random.choice(products_view_link).click()
+        sleep(3)
 
         # He click to add in cart
-        self.wait_for(self.browser.find_element_by_xpath('//button[text()="Add to cart"]')).click()
-
-        # And we redirect to cart page and see item in cart list
-        title = self.wait_for(self.browser.find_element_by_class_name('title-page')).text
-        assert title == 'Your shopping cart'
-
+        self.wait_for(self.browser.find_element_by_xpath('//form/input[@value="Add to cart"]')).click()
 
         # And see red label near link to cart and he text equal qualuty items Toni add to cart
-        count_item_in_cart = self.wait_for(self.browser.find_element_by_class_name('count-item--exist')).text
-        assert count_item_in_cart == '1'
+        assert self.wait_for(self.browser.find_element_by_xpath('//a["link-to-text"]/span')) == '1'
+
+        # And we redirect to cart page and see item in cart list
+        assert self.wait_for(self.browser.find_element_by_xpath("//h1['title-page']")).text  == 'Your shopping cart'
 
 
 class CartAddTest(FunctionalTest):
@@ -57,7 +56,7 @@ class CartAddTest(FunctionalTest):
         self.browser.get(self.live_server_url + reverse('catalog:item', kwargs={'product_slug': slug,}))
 
         # He click to add in cart
-        self.wait_for(self.browser.find_element_by_xpath('//button[text()="Add to cart"]')).click()
+        self.wait_for(self.browser.find_element_by_xpath('//form/input[@value="Add to cart"]')).click()
 
 
 class CartChangesTest(FunctionalTest):
@@ -73,7 +72,7 @@ class CartChangesTest(FunctionalTest):
         self.browser.get(self.live_server_url + reverse('catalog:item', kwargs={'product_slug': slug,}))
 
         # He click to add in cart
-        self.wait_for(self.browser.find_element_by_xpath('//button[text()="Add to cart"]')).click()
+        self.wait_for(self.browser.find_element_by_xpath('//form/input[@value="Add to cart"]')).click()
 
         # He want change count item in cart
         ## Toni click to select field with count
@@ -97,7 +96,7 @@ class CartChangesTest(FunctionalTest):
         self.browser.get(self.live_server_url + reverse('catalog:item', kwargs={'product_slug': slug,}))
 
         # He click to add in cart
-        self.wait_for(self.browser.find_element_by_xpath('//button[text()="Add to cart"]')).click()
+        self.wait_for(self.browser.find_element_by_xpath('//form/input[@value="Add to cart"]')).click()
 
         # Now Toni in cart and he delete item
         self.wait_for(self.browser.find_element_by_xpath('//a[text()="Remove"]')).click()
@@ -120,7 +119,7 @@ class CartChangesTest(FunctionalTest):
         self.browser.get(self.live_server_url + reverse('catalog:item', kwargs={'product_slug': slug,}))
 
         # He click to add in cart
-        self.wait_for(self.browser.find_element_by_xpath('//button[text()="Add to cart"]')).click()
+        self.wait_for(self.browser.find_element_by_xpath('//form/input[@value="Add to cart"]')).click()
 
         # Now he go to catalog
         self.wait_for(self.browser.find_element_by_xpath('//a[text()="Continue shopping"]')).click()
