@@ -7,16 +7,16 @@ WORKDIR /srv/app
 
 # install psycopg2 dependencies
 RUN apk update \
-    && apk add postgresql-dev gcc python3-dev musl-dev
+    && apk add postgresql-dev gcc python3-dev musl-dev zlib-dev libjpeg 
 
 # set environment variables
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
 # install dependencies
-RUN pip3 install --upgrade pip
+RUN python -m pip install --upgrade pip
 COPY ./deploy/pip-prd.txt ./pip-prd.txt
-RUN pip3 install -r pip-prd.txt
+RUN python -m pip install -r pip-prd.txt
 
 # copy project
 COPY . .
